@@ -4,7 +4,7 @@ Zero copy screen recording (like kmsgrab in ffmpeg) dont't records cursor. This
 software renders cursor image over real cursor. This allows to record video with
 cursor.
 
-# Instalation
+# Installation
 
 ```
 $ make
