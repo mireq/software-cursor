@@ -324,7 +324,7 @@ int main(int argc, char *argv[])
 	attr.border_pixel = 0;
 	attr.background_pixel = 0;
 
-	window = XCreateWindow(display, root_window, 750, 200, pixmap_size, pixmap_size, 0, vinfo.depth, InputOutput, vinfo.visual, CWColormap | CWBorderPixel | CWBackPixel, &attr);
+	window = XCreateWindow(display, root_window, 0, 0, pixmap_size, pixmap_size, 0, vinfo.depth, InputOutput, vinfo.visual, CWColormap | CWBorderPixel | CWBackPixel, &attr);
 
 	XFixesSelectCursorInput(display, root_window, XFixesDisplayCursorNotifyMask);
 	XSelectInput(display, window, ExposureMask | StructureNotifyMask | VisibilityChangeMask);
