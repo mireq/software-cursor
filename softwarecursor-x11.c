@@ -192,13 +192,16 @@ static void update_cursor_pixmap() {
 			uint32_t bg_color = cursor_pixmap_data[target_pos];
 			uint32_t src_alpha = src_color >> 24;
 			uint32_t bg_alpha = bg_color >> 24;
-			uint32_t alpha = 255 - (((255 - src_alpha) * (255 - bg_alpha)) / 255);
-			bg_alpha = 255 - src_alpha;
-			uint32_t color = (alpha << 24) |
-				(((src_alpha * (src_color & 0xff)) + (bg_alpha * (bg_color & 0xff))) / 256) |
-				((((src_alpha * ((src_color & 0xff00 >> 8))) + (bg_alpha * ((bg_color & 0xff00) >> 8))) / 256) << 8) |
-				((((src_alpha * ((src_color & 0xff0000 >> 16))) + (bg_alpha * ((bg_color & 0xff0000) >> 16))) / 256) << 16)
-			;
+			uint32_t a_over = src_alpha + ((bg_alpha * (255 - src_alpha)) / 255);
+			bg_alpha = ((bg_alpha * (255 - src_alpha)) / 255);
+			uint32_t color = 0;
+			if (a_over > 0) {
+				color = (a_over << 24) |
+					(((src_alpha * (src_color & 0xff)) + (bg_alpha * (bg_color & 0xff))) / a_over) |
+					((((src_alpha * ((src_color & 0xff00 >> 8))) + (bg_alpha * ((bg_color & 0xff00) >> 8))) / a_over) << 8) |
+					((((src_alpha * ((src_color & 0xff0000 >> 16))) + (bg_alpha * ((bg_color & 0xff0000) >> 16))) / a_over) << 16)
+				;
+			}
 			cursor_pixmap_data[target_pos] = color;
 			x_pos++;
 
