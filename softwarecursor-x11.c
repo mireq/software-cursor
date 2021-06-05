@@ -308,8 +308,8 @@ int main(int argc, char *argv[])
 
 	unsigned char mask_bytes[(XI_LASTEVENT + 7) / 8] = {0};
 	XISetMask(mask_bytes, XI_Motion);
-	XISetMask(mask_bytes, XI_ButtonPress);
-	XISetMask(mask_bytes, XI_ButtonRelease);
+	XISetMask(mask_bytes, XI_RawButtonPress);
+	XISetMask(mask_bytes, XI_RawButtonRelease);
 
 	XIEventMask evmasks[1];
 	evmasks[0].deviceid = XIAllDevices;
