@@ -326,8 +326,9 @@ int main(int argc, char *argv[])
 	attr.colormap = XCreateColormap(display, root_window, vinfo.visual, AllocNone);
 	attr.border_pixel = 0;
 	attr.background_pixel = 0;
+	attr.background_pixmap = None;
 
-	window = XCreateWindow(display, root_window, 0, 0, pixmap_size, pixmap_size, 0, vinfo.depth, InputOutput, vinfo.visual, CWColormap | CWBorderPixel | CWBackPixel, &attr);
+	window = XCreateWindow(display, root_window, 0, 0, pixmap_size, pixmap_size, 0, vinfo.depth, InputOutput, vinfo.visual, CWColormap | CWBorderPixel | CWBackPixel | CWEventMask | CWOverrideRedirect, &attr);
 
 	XFixesSelectCursorInput(display, root_window, XFixesDisplayCursorNotifyMask);
 	XSelectInput(display, window, ExposureMask | StructureNotifyMask | VisibilityChangeMask);
@@ -337,8 +338,9 @@ int main(int argc, char *argv[])
 	attr.override_redirect = 1;
 	XChangeWindowAttributes(display, window, CWOverrideRedirect, &attr);
 	XserverRegion region = XFixesCreateRegion (display, NULL, 0);
-	XFixesSetWindowShapeRegion (display, window, ShapeInput, 0, 0, region);
-	XFixesDestroyRegion (display, region);
+	XFixesSetWindowShapeRegion(display, window, ShapeBounding, 0, 0, 0);
+	XFixesSetWindowShapeRegion(display, window, ShapeInput, 0, 0, region);
+	XFixesDestroyRegion(display, region);
 
 	XMapWindow(display, window);
 
@@ -350,7 +352,6 @@ int main(int argc, char *argv[])
 	set_window_hints();
 	update_cursor_pixmap();
 	update_cursor_position();
-
 
 	XEvent e;
 	while (1) {
