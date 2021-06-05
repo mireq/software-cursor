@@ -40,3 +40,7 @@ ffmpeg \
   -y \
   -- vidoe.mkv
 ```
+
+# Screenshots
+
+![Screenshot](https://raw.githubusercontent.com/wiki/mireq/software-cursor/softwarecursor.gif)
