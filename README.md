@@ -53,3 +53,7 @@ ffmpeg \
 # Screenshots
 
 ![Screenshot](https://raw.githubusercontent.com/wiki/mireq/software-cursor/softwarecursor.gif)
+
+# Alternatives
+
+- [swcursor](https://github.com/andykitchen/swcursor)
