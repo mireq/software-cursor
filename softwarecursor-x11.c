@@ -326,6 +326,7 @@ int main(int argc, char *argv[])
 	attr.colormap = XCreateColormap(display, root_window, vinfo.visual, AllocNone);
 	attr.border_pixel = 0;
 	attr.background_pixel = 0;
+	attr.override_redirect = 0;
 	attr.background_pixmap = None;
 
 	window = XCreateWindow(display, root_window, 0, 0, pixmap_size, pixmap_size, 0, vinfo.depth, InputOutput, vinfo.visual, CWColormap | CWBorderPixel | CWBackPixel | CWEventMask | CWOverrideRedirect, &attr);
