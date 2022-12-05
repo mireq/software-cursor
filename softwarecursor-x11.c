@@ -323,6 +323,7 @@ int main(int argc, char *argv[])
 	XMatchVisualInfo(display, XDefaultScreen(display), 32, TrueColor, &vinfo);
 
 	XSetWindowAttributes attr;
+	memset(&attr, 0, sizeof(XSetWindowAttributes));
 	attr.colormap = XCreateColormap(display, root_window, vinfo.visual, AllocNone);
 	attr.border_pixel = 0;
 	attr.background_pixel = 0;
